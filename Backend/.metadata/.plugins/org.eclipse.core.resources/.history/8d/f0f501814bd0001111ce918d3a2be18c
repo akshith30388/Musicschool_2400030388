@@ -1,0 +1,8 @@
+package com.klef.soa.docker.dto;
+
+public class RequestMusicSchool {
+	private String schoolName;
+	private String instrument;
+	private int studentCount;
+	private boolean active;
+}

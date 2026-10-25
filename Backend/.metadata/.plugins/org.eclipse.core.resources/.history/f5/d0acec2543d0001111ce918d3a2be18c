@@ -1,0 +1,17 @@
+package com.klef.soa.docker.entity;
+
+
+@Entity
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class MusicSchoolEntity {
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+private Long id;
+private String schoolName;
+private String instrument;
+private int studentCount;
+private boolean active;
+}
+}

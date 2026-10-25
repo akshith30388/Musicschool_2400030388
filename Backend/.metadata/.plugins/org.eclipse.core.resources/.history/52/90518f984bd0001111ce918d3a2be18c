@@ -1,0 +1,9 @@
+package com.klef.soa.docker.dto;
+
+public class ResponseMusicSchool {
+	private Long id;
+	private String schoolName;
+	private String instrument;
+	private int studentCount;
+	private boolean active;
+}

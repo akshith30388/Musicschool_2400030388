@@ -1,0 +1,7 @@
+package com.klef.soa.docker.repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface MusicScoolRepository extends JpaRepository<MusicSchool, Long>{
+
+}

@@ -1,0 +1,9 @@
+package com.klef.soa.docker.service;
+
+public class MusicSchoolImpl implements MuiscSchoolService{
+
+	private MusicScoolRepository repo;
+	MusicSchoolImpl(MusicScoolRepository repo){
+	this.repo=repo;
+	}
+}

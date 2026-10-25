@@ -1,0 +1,14 @@
+package com.klef.soa.docker.service;
+
+import org.springframework.stereotype.Service;
+
+import com.klef.soa.docker.repository.MusicScoolRepository;
+
+@Service
+public class MusicSchoolImpl implements MuiscSchoolService{
+
+	private MusicScoolRepository repo;
+	public MusicSchoolImpl(MusicScoolRepository repo){
+	this.repo=repo;
+	}
+}

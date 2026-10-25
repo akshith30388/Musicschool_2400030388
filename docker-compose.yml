@@ -1,0 +1,56 @@
+services:
+  postgresdb:
+    image: postgres:16-alpine
+    container_name: postgres-db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: docker
+      POSTGRES_DB: klustudentdb
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d klustudentdb"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    networks:
+      - springboot-postgres-net
+
+  backend:
+    build:
+      context: ./Backend/MusicSchool
+      dockerfile: ../Dockerfile
+    container_name: music-school-backend
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgresdb:5432/klustudentdb
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: docker
+    ports:
+      - "8080:8080"
+    depends_on:
+      postgresdb:
+        condition: service_healthy
+    restart: on-failure
+    networks:
+      - springboot-postgres-net
+
+  frontend:
+    build:
+      context: ./Frontend
+      dockerfile: Dockerfile
+    container_name: music-school-frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+    restart: on-failure
+    networks:
+      - springboot-postgres-net
+
+volumes:
+  postgres_data:
+
+networks:
+  springboot-postgres-net:
